@@ -13,6 +13,16 @@ class AdminService {
       }
     );
   }
+  fetchTotalIncome(token) {
+    return axios.get(
+      ADMIN_API_BASE_URL + "/get-income",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  }
   registerNewAdmin(token, data) {
     return axios.post(
       ADMIN_API_BASE_URL + "/register-new-admin",
@@ -25,6 +35,16 @@ class AdminService {
     );
   }
 
+  getUserCount(token) {
+    return axios.get(
+      ADMIN_API_BASE_URL + "/get-user-count",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+  }
 
   addPlan(plan, token) {
     return axios.post(ADMIN_API_BASE_URL + "/plan", plan, {
@@ -64,6 +84,21 @@ class AdminService {
     });
   }
 
+  addAddon(addon, token) {
+    return axios.post(ADMIN_API_BASE_URL + "/addon", addon, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+  }
+  updateAddon(id, data, token) {
+    return axios.put(ADMIN_API_BASE_URL + "/addon/" + id, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
   getAddon(token) {
     return axios.get(ADMIN_API_BASE_URL + "/getAddons", {
       headers: {
@@ -80,6 +115,14 @@ class AdminService {
     });
   }
 
+  deleteAddonById(id, token) {
+    return axios.delete(ADMIN_API_BASE_URL + "/addon/" + id, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
   getRecharges(token) {
     return axios.get(ADMIN_API_BASE_URL + "/get-recharges", {
       headers: {
@@ -87,7 +130,6 @@ class AdminService {
       },
     });
   }
-
 
 }
 

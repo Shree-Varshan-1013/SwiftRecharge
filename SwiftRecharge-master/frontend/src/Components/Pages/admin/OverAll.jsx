@@ -396,9 +396,6 @@ const OverAll = () => {
                         <button onClick={() => handleTabClick('addon')} className={`rounded-full focus:outline-none focus:ring-2 focus:bg-teal-50 focus:ring-teal-800 ml-4 sm:ml-8 ${selectedTab === 'addon' ? 'bg-teal-100 text-teal-700' : 'text-gray-600  hover:text-teal-700 hover:bg-teal-100'} py-2 px-8 rounded-full`}>
                             <p className='font-semibold '>Addon</p>
                         </button>
-                        <div className="pl-10">
-                            <input type="text" placeholder="Search for a plan, e.g. 199" className="w-full p-2 border border-gray-300 rounded-lg" />
-                        </div>
                     </div>
                     {selectedTab === 'plans' && !showForm && (
                         <button onClick={() => handleAddButtonClick("plans")} className="focus:ring-2 focus:ring-offset-2 focus:ring-teal-600 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-teal-700 hover:bg-teal-600 focus:outline-none rounded">

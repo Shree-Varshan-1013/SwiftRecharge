@@ -15,7 +15,7 @@ const AddPlan = ({ userName }) => {
         planPrice: "",
         planDetails: "",
         planValidity: "",
-        OperatorName: ""
+        operatorName: ""
     }
 
     const { values, errors, touched, handleChange, handleSubmit } = useFormik({
@@ -135,9 +135,9 @@ const AddPlan = ({ userName }) => {
                             <label className="sr-only font-anuphan">Operator</label>
                             <div className="relative">
                                 <select
-                                    id="OperatorName"
-                                    name="OperatorName"
-                                    value={values.OperatorName}
+                                    id="operatorName"
+                                    name="operatorName"
+                                    value={values.operatorName}
                                     onChange={handleChange}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan appearance-none  "
                                 >
@@ -147,7 +147,7 @@ const AddPlan = ({ userName }) => {
                                     <option value="Jio">Jio</option>
                                     <option value="Vi">Vi</option>
                                 </select>
-                                {errors.OperatorName && touched.OperatorName && <div className="text-red-600 text-xs">{errors.OperatorName}</div>}
+                                {errors.operatorName && touched.operatorName && <div className="text-red-600 text-xs">{errors.operatorName}</div>}
                             </div>
                         </div>
                     </div>

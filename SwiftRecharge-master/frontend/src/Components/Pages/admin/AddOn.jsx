@@ -1,10 +1,14 @@
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
-
+import Swal from 'sweetalert2';
 import PropTypes from 'prop-types';
 import AddOnSchema from '../../../Schemas/AddOnSchema';
+import AdminService from '../../../services/AdminService';
+import { useSelector } from 'react-redux';
 
 const AddOn = ({ userName }) => {
+    
+    const { accessToken } = useSelector(state => state.global);
 
     const initialData = {
         addonName: "",
@@ -21,12 +25,31 @@ const AddOn = ({ userName }) => {
         onSubmit: (values, action) => {
             console.log(values);
             eventAction();
-            action.resetForm();
         },
     });
 
-    const eventAction = () => {
-        console.log(values);
+    const eventAction = async () => {
+        try {
+            const res = await AdminService.addAddon(values, accessToken);
+            console.log(res);
+            setTimeout(() => {
+                if (res.status === 200) {
+                    Swal.fire(
+                        'Added!',
+                        'Successfully Addon added.',
+                        'success'
+                    );
+                }
+            }, 2000);
+        }
+        catch (err) {
+            Swal.fire(
+                'Error!',
+                'Something went wrong.',
+                'error'
+            );
+            console.log(err);
+        }
     }
 
     return (
@@ -97,22 +120,6 @@ const AddOn = ({ userName }) => {
                                 />
 
                                 {errors.addonDetails && touched.addonDetails && <div className="text-red-600 text-xs">{errors.addonDetails}</div>}
-                            </div>
-                        </div>
-                        <div>
-                            <label className="sr-only font-anuphan">Validity</label>
-                            <div className="relative">
-                                <input
-                                    name="addonValidity"
-                                    type="text"
-                                    value={values.addonValidity}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan "
-                                    placeholder="Enter the Validity"
-                                />
-
-                                {errors.addonValidity && touched.addonValidity && <div className="text-red-600 text-xs">{errors.addonValidity}</div>}
                             </div>
                         </div>
                         <div>

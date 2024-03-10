@@ -1,39 +1,76 @@
-import { useFormik } from 'formik';
-import { useNavigate } from 'react-router-dom';
-
 import PropTypes from 'prop-types';
-import PlanSchema from '../../../Schemas/PlanSchema';
+import { useEffect, useState } from 'react';
 
-const EditAddon = ({ userName }) => {
+import Swal from 'sweetalert2';
+import AdminService from '../../../services/AdminService';
 
-    const initialData = {
+const EditAddon = ({ AddonId, accessToken }) => {
+
+    const [tar, setTar] = useState({
         addonName: "",
         data: "",
         addonPrice: "",
         addonDetails: "",
-        addonValidity: "",
         operatorName: ""
-    }
-
-    const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
-        initialValues: initialData,
-        validationSchema: PlanSchema,
-        onSubmit: (values, action) => {
-            console.log(values);
-            eventAction();
-            action.resetForm();
-        },
     });
 
-    const eventAction = () => {
-        console.log(values);
+    useEffect(() => {
+        fetchPlan();
+    }, [AddonId, accessToken]);
+
+    const fetchPlan = async () => {
+        try {
+            const res = await AdminService.getAddOnById(AddonId, accessToken);
+            console.log(res);
+            setTar(res.data);
+        } catch (error) {
+            console.error('Error fetching addon:', error);
+        }
     }
 
+    const eventChange = (e) => {
+        const { name, value } = e.target;
+        setTar(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    }
+
+    const eventAction = (e) => {
+        e.preventDefault();
+        console.log(tar);
+        eventSave();
+    }
+
+    const eventSave = async () => {
+        try {
+            const res = await AdminService.updateAddon(AddonId, tar, accessToken);
+            console.log(res);
+
+            setTimeout(() => {
+                if (res.status === 200) {
+                    Swal.fire(
+                        'Updated!',
+                        'Successfully updated addon.',
+                        'success'
+                    );
+                }
+            }, 2000);
+        }
+        catch (err) {
+            Swal.fire(
+                'Error!',
+                'Something went wrong.',
+                'error'
+            );
+            console.log(err);
+        }
+    }
     return (
         <div className="w-full h-screen">
             <div className="">
                 <h1 className="text-center text-2xl font-bold font-anuphan text-teal-600 sm:text-3xl pt-5">Edit Addon</h1>
-                <form onSubmit={handleSubmit} className="mb-0 space-y-4 rounded-lg p-4 shadow-2xl sm:p-6 lg:p-8">
+                <form onSubmit={eventAction} className="mb-0 space-y-4 rounded-lg p-4 shadow-2xl sm:p-6 lg:p-8">
                     <div className='grid grid-cols-2 gap-4'>
                         <div>
                             <label className="sr-only font-anuphan">Name</label>
@@ -41,14 +78,11 @@ const EditAddon = ({ userName }) => {
                                 <input
                                     name="addonName"
                                     type="text"
-                                    value={values.addonName}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
+                                    value={tar.addonName}
+                                    onChange={eventChange}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan bg-slate-200"
                                     placeholder="Enter Add on Name"
                                 />
-
-                                {errors.addonName && touched.addonName && <div className="text-red-600 text-xs">{errors.addonName}</div>}
                             </div>
                         </div>
                         <div>
@@ -57,14 +91,11 @@ const EditAddon = ({ userName }) => {
                                 <input
                                     name="data"
                                     type="text"
-                                    value={values.data}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
+                                    value={tar.data}
+                                    onChange={eventChange}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan bg-slate-200"
                                     placeholder="Enter the data"
                                 />
-
-                                {errors.data && touched.data && <div className="text-red-600 text-xs">{errors.data}</div>}
                             </div>
                         </div>
                         <div>
@@ -73,14 +104,11 @@ const EditAddon = ({ userName }) => {
                                 <input
                                     name="addonPrice"
                                     type="text"
-                                    value={values.addonPrice}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
+                                    value={tar.addonPrice}
+                                    onChange={eventChange}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan bg-slate-200"
                                     placeholder="Enter the price"
                                 />
-
-                                {errors.addonPrice && touched.addonPrice && <div className="text-red-600 text-xs">{errors.addonPrice}</div>}
                             </div>
                         </div>
                         <div>
@@ -89,30 +117,11 @@ const EditAddon = ({ userName }) => {
                                 <input
                                     name="addonDetails"
                                     type="text"
-                                    value={values.addonDetails}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
+                                    value={tar.addonDetails}
+                                    onChange={eventChange}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan bg-slate-200"
                                     placeholder="Enter description"
                                 />
-
-                                {errors.addonDetails && touched.addonDetails && <div className="text-red-600 text-xs">{errors.addonDetails}</div>}
-                            </div>
-                        </div>
-                        <div>
-                            <label className="sr-only font-anuphan">Validity</label>
-                            <div className="relative">
-                                <input
-                                    name="addonValidity"
-                                    type="text"
-                                    value={values.addonValidity}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan bg-slate-200"
-                                    placeholder="Enter the Validity"
-                                />
-
-                                {errors.addonValidity && touched.addonValidity && <div className="text-red-600 text-xs">{errors.addonValidity}</div>}
                             </div>
                         </div>
                         <div>
@@ -120,9 +129,8 @@ const EditAddon = ({ userName }) => {
                             <div className="relative">
                                 <select
                                     name="operatorName"
-                                    value={values.operatorName}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
+                                    value={tar.operatorName}
+                                    onChange={eventChange}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan appearance-none bg-slate-200"
                                 >
                                     <option value="" disabled>Select Operator</option>
@@ -131,8 +139,6 @@ const EditAddon = ({ userName }) => {
                                     <option value="Jio">Jio</option>
                                     <option value="Vi">Vi</option>
                                 </select>
-
-                                {errors.operatorName && touched.operatorName && <div className="text-red-600 text-xs">{errors.operatorName}</div>}
                             </div>
                         </div>
                     </div>

@@ -7,7 +7,7 @@ export const PlanSchema = Yup.object({
     planDetails: Yup.string().required('Plan details are required'),
     planPrice: Yup.number().typeError('Price must be a number').required('Price is required'),
     planValidity: Yup.string().required('Validity is required'),
-    OperatorName: Yup.string().required('Operator name is required')
+    operatorName: Yup.string().required('Operator name is required')
 });
 
 
