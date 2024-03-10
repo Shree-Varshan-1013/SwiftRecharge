@@ -109,4 +109,17 @@ public class UserServiceImpl implements UserService {
 		return paymentRepo.getPaymentByUserName(username);
 	}
 
+    public Plan getLatestReord(String username) {
+		List<Payment> tar = paymentRepo.findLatestRecordByUsername(username); 
+        return tar.get(0).getRecharge().getPlan();
+    }
+
+	public int findAll() {
+		return userRepo.findAll().size();
+	}
+
+    public AppUser finduserByUsername(String username) {
+        return userRepo.findByUserName(username);
+    }
+
 }

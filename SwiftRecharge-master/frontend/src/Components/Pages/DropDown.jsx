@@ -18,7 +18,7 @@ function DropdownMenu() {
             showConfirmButton: false,
             timer: 2000
         });
-
+        navigate("/");
     }
     const [isOpen, setIsOpen] = useState(false);
 

@@ -9,6 +9,7 @@ import com.swiftrecharge.backend.entity.Addon;
 import com.swiftrecharge.backend.entity.AppUser;
 import com.swiftrecharge.backend.entity.Plan;
 import com.swiftrecharge.backend.entity.Recharge;
+import com.swiftrecharge.backend.service.AddonServiceImpl;
 import com.swiftrecharge.backend.service.AdminServiceImpl;
 import com.swiftrecharge.backend.service.PlanServiceImpl;
 import com.swiftrecharge.backend.service.RechargeServiceImpl;
@@ -32,10 +33,29 @@ public class AdminController {
     
     private final RechargeServiceImpl rechargeService;
 
+    private final AddonServiceImpl addonService;
+
     @Operation(summary = "Get all users", description = "Retrieve a list of all users.")
     @GetMapping("/get-all-users")
     public List<AppUser> getAllUsers() {
         return adminService.getAllUsers();
+    }
+
+    @Operation(summary = "Add addon", description = "Add a addon.")
+    @PostMapping("/addon")
+    public boolean addAddon(@RequestBody Addon addon) {
+        addonService.createAddon(addon);
+        return true;
+    }
+    
+    @Operation(summary = "Update a addon", description = "Update an existing addon by ID.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Addon updated"),
+            @ApiResponse(responseCode = "404", description = "Addon not found")
+    })
+    @PutMapping("/addon/{id}")
+    public Addon updateAddon(@Parameter(description = "Addon ID") @PathVariable Long id, @RequestBody Addon addon) {
+        return addonService.updateAddon(id, addon);
     }
 
     @Operation(summary = "Register a new admin", description = "Register a new admin user.")

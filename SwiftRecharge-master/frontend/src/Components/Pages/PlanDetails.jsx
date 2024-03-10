@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, { useState } from 'react'
 import Tabs from './admin/Tabs'
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -11,8 +11,7 @@ const PlanDetails = () => {
 
     const { operator } = useParams();
 
-    const { accessToken, isLoggedIn, userDetails } = useSelector((state) => state.global);
-
+    const { accessToken, userDetails } = useSelector((state) => state.global);
 
     return (
         <div className='pt-20' >
@@ -24,24 +23,35 @@ const PlanDetails = () => {
                                 className="hidden sm:grid sm:size-20 sm:shrink-0 sm:place-content-center sm:rounded-full sm:border-2"
                                 aria-hidden="true"
                             >
-                                <div className="flex items-center gap-1">
-                                    <img src="/assets/Airtel.png" />
+                                <div className="flex items-center">
+                                    {
+                                        operator === "Airtel" && <img src="/assets/airtel.png" className="rounded-full" />
+                                    }
+                                    {
+                                        operator === "Jio" && <img src="/assets/jio.png" className="rounded-full" />
+                                    }
+                                    {
+                                        operator === "Bsnl" && <img src="/assets/bsnl.png" className="rounded-full" />
+                                    }
+                                    {
+                                        operator === "Vi" && <img src="/assets/vi.png" height={100} className="rounded-full bg-cover" />
+                                    }
                                 </div>
                             </div>
 
                             <div>
                                 <strong
-                                        className="rounded border border-purple bg-purple px-3 py-1.5 text-[10px] font-medium text-white font-anuphan"
-                                    >
-                                        {userDetails.mobileNumber}
-                                    </strong>
+                                    className="rounded border border-purple bg-purple px-3 py-1.5 text-[10px] font-mediumfont-anuphan"
+                                >
+                                    {userDetails.mobileNumber}
+                                </strong>
 
                                 <h3 className="mt-4 text-lg font-medium sm:text-xl">
                                     <p className="font-poppins"> {operator} </p>
                                 </h3>
 
                                 <p className="mt-1 text-sm text-gray-700 font-anuphan">
-                                {operator} Prepaid | Tamil Nadu
+                                    {operator} Prepaid | Tamil Nadu
                                 </p>
                             </div>
                         </div>

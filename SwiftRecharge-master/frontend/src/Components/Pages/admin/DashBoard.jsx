@@ -4,7 +4,7 @@ import Content from './Content'
 
 const DashBoard = () => {
 
-  const [activeLink, setActiveLink] = useState("link1");
+  const [activeLink, setActiveLink] = useState("link2");
 
   return (
     <div className='flex'>

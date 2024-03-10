@@ -113,6 +113,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public boolean addPlan(Plan plan) {
+        System.out.println(plan.toString());
         return planRepo.save(plan) != null ? true : false;
     }
 

@@ -18,7 +18,7 @@ const Verify = () => {
             name: "Swift Recharge",
             description: "Sample",
             prefill: {
-                name: userDetails.username,
+                name: userDetails.userName,
                 email: userDetails.email,
                 contact: userDetails.mobileNumber,
             },

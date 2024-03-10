@@ -22,7 +22,6 @@ public class Addon {
 	private String data;
     private double addonPrice;
     private String addonDetails;
-    private String addonValidity;
 	private String OperatorName;
 
 }

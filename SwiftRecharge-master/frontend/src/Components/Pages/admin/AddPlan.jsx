@@ -1,34 +1,56 @@
 import { useFormik } from 'formik';
-import { useNavigate } from 'react-router-dom';
-
-import PropTypes from 'prop-types';
+import Swal from 'sweetalert2';
 import PlanSchema from '../../../Schemas/PlanSchema';
+import AdminService from '../../../services/AdminService';
+import { useSelector } from 'react-redux';
 
 const AddPlan = ({ userName }) => {
+
+    const { accessToken } = useSelector(state => state.global);
 
     const initialData = {
         planName: "",
         planType: "",
-        data: "",
-        addonPrice: "",
-        addonDetails: "",
-        addonValidity: "",
-        operatorName: ""
+        planData: "",
+        planPrice: "",
+        planDetails: "",
+        planValidity: "",
+        OperatorName: ""
     }
 
-    const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
+    const { values, errors, touched, handleChange, handleSubmit } = useFormik({
         initialValues: initialData,
         validationSchema: PlanSchema,
         onSubmit: (values, action) => {
             console.log(values);
             eventAction();
-            action.resetForm();
         },
     });
 
-    const eventAction = () => {
-        console.log(values);
+    const eventAction = async () => {
+        try {
+            const res = await AdminService.addPlan(values, accessToken);
+            console.log(res);
+            setTimeout(() => {
+                if (res.status === 200) {
+                    Swal.fire(
+                        'Added!',
+                        'Successfully Plan Added.',
+                        'success'
+                    );
+                }
+            }, 2000);
+        }
+        catch (err) {
+            Swal.fire(
+                'Error!',
+                'Something went wrong.',
+                'error'
+            );
+            console.log(err);
+        }
     }
+
 
 
     return (
@@ -41,88 +63,82 @@ const AddPlan = ({ userName }) => {
                             <label className="sr-only font-anuphan">Name</label>
                             <div className="relative">
                                 <input
-                                    name="addonName"
+                                    name="planName"
                                     type="text"
-                                    value={values.addonName}
+                                    value={values.planName}
                                     onChange={handleChange}
-                                    onBlur={handleBlur}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan "
                                     placeholder="Enter Plan Name"
                                 />
-                                {errors.addonName && touched.addonName && <div className="text-red-600 text-xs">{errors.addonName}</div>}
+                                {errors.planName && touched.planName && <div className="text-red-600 text-xs">{errors.planName}</div>}
                             </div>
                         </div>
                         <div>
                             <label className="sr-only font-anuphan">Data</label>
                             <div className="relative">
                                 <input
-                                    name="data"
+                                    name="planData"
                                     type="text"
-                                    value={values.data}
+                                    value={values.planData}
                                     onChange={handleChange}
-                                    onBlur={handleBlur}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan "
                                     placeholder="Enter the data"
                                 />
-                                {errors.data && touched.data && <div className="text-red-600 text-xs">{errors.data}</div>}
+                                {errors.planData && touched.planData && <div className="text-red-600 text-xs">{errors.planData}</div>}
                             </div>
                         </div>
                         <div>
                             <label className="sr-only font-anuphan">Price</label>
                             <div className="relative">
                                 <input
-                                    name="addonPrice"
+                                    name="planPrice"
                                     type="text"
-                                    value={values.addonPrice}
+                                    value={values.planPrice}
                                     onChange={handleChange}
-                                    onBlur={handleBlur}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan "
                                     placeholder="Enter the price"
                                 />
 
-                                {errors.addonPrice && touched.addonPrice && <div className="text-red-600 text-xs">{errors.addonPrice}</div>}
+                                {errors.planPrice && touched.planPrice && <div className="text-red-600 text-xs">{errors.planPrice}</div>}
                             </div>
                         </div>
                         <div>
                             <label className="sr-only font-anuphan">Details</label>
                             <div className="relative">
                                 <input
-                                    name="addonDetails"
+                                    name="planDetails"
                                     type="text"
-                                    value={values.addonDetails}
+                                    value={values.planDetails}
                                     onChange={handleChange}
-                                    onBlur={handleBlur}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan "
                                     placeholder="Enter description"
                                 />
 
-                                {errors.addonDetails && touched.addonDetails && <div className="text-red-600 text-xs">{errors.addonDetails}</div>}
+                                {errors.planDetails && touched.planDetails && <div className="text-red-600 text-xs">{errors.planDetails}</div>}
                             </div>
                         </div>
                         <div>
                             <label className="sr-only font-anuphan">Validity</label>
                             <div className="relative">
                                 <input
-                                    name="addonValidity"
+                                    name="planValidity"
                                     type="text"
-                                    value={values.addonValidity}
+                                    value={values.planValidity}
                                     onChange={handleChange}
-                                    onBlur={handleBlur}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan "
                                     placeholder="Enter the Validity"
                                 />
-
-                                {errors.addonValidity && touched.addonValidity && <div className="text-red-600 text-xs">{errors.addonValidity}</div>}
+                                {errors.planValidity && touched.planValidity && <div className="text-red-600 text-xs">{errors.planValidity}</div>}
                             </div>
                         </div>
                         <div>
                             <label className="sr-only font-anuphan">Operator</label>
                             <div className="relative">
                                 <select
-                                    name="operatorName"
-                                    value={values.operatorName}
+                                    id="OperatorName"
+                                    name="OperatorName"
+                                    value={values.OperatorName}
                                     onChange={handleChange}
-                                    onBlur={handleBlur}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan appearance-none  "
                                 >
                                     <option value="" disabled>Select Operator</option>
@@ -131,8 +147,22 @@ const AddPlan = ({ userName }) => {
                                     <option value="Jio">Jio</option>
                                     <option value="Vi">Vi</option>
                                 </select>
-                                {errors.operatorName && touched.operatorName && <div className="text-red-600 text-xs">{errors.operatorName}</div>}
+                                {errors.OperatorName && touched.OperatorName && <div className="text-red-600 text-xs">{errors.OperatorName}</div>}
                             </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label className="sr-only font-anuphan">Plan Type</label>
+                        <div className="relative">
+                            <input
+                                name="planType"
+                                type="text"
+                                value={values.planType}
+                                onChange={handleChange}
+                                className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan "
+                                placeholder="Enter the plan Type"
+                            />
+                            {errors.planType && touched.planType && <div className="text-red-600 text-xs">{errors.planType}</div>}
                         </div>
                     </div>
                     <div className='flex justify-center items-center'>
@@ -147,10 +177,6 @@ const AddPlan = ({ userName }) => {
             </div>
         </div>
     )
-}
-
-AddPlan.propTypes = {
-    username: PropTypes.string.isRequired
 }
 
 export default AddPlan
