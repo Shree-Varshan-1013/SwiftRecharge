@@ -16,10 +16,10 @@ export default function Hero() {
 
 
     return (
-        <div className="bg-white">
+        <div className="bg-white select-none">
 
             <Header />
-            <div className="relative isolate px-6 pt-14 lg:px-8" style={{
+            <div className="relative isolate px-6 pt-14 lg:px-8 select-none" style={{
                 backgroundImage: "url(/assets/bbblurry.svg)",
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
