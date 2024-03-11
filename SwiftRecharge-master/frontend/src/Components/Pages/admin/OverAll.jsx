@@ -294,12 +294,14 @@ const OverAll = () => {
                                 </tbody>
                             </table>
                                 <div className='flex justify-center'>
-                                    <button onClick={prevPage} disabled={currentPage === 1} className="relative rounded px-3 overflow-hidden group bg-teal-600 hover:bg-gradient-to-r hover:from-teal-600 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-teal-600 transition-all ease-out duration-300 mr-4">
+                                    <a onClick={prevPage} disabled={currentPage === 1} className="rounded relative inline-flex group items-center justify-center px-3.5 py-2 m-1 cursor-pointer border-b-4 border-l-2 active:border-teal-600 active:shadow-none shadow-lg bg-gradient-to-tr from-teal-600 to-teal-500 border-teal-700 text-white">
+                                        <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-32 group-hover:h-32 opacity-10"></span>
                                         <span className="relative">Previous</span>
-                                    </button>
-                                    <button onClick={nextPage} disabled={indexOfLastRecord >= records.length} className="relative rounded px-5 py-2.5 overflow-hidden group bg-teal-600 hover:bg-gradient-to-r hover:from-teal-600 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-teal-600 transition-all ease-out duration-300">
+                                    </a>
+                                    <a onClick={nextPage} disabled={indexOfLastRecord >= records.length} className="rounded relative inline-flex group items-center justify-center px-3.5 py-2 m-1 cursor-pointer border-b-4 border-l-2 active:border-teal-600 active:shadow-none shadow-lg bg-gradient-to-tr from-teal-600 to-teal-500 border-teal-700 text-white">
+                                        <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-32 group-hover:h-32 opacity-10"></span>
                                         <span className="relative">Next</span>
-                                    </button>
+                                    </a>
                                 </div>
                             </>
                         )
@@ -369,12 +371,14 @@ const OverAll = () => {
                             </tbody>
                         </table>
                             <div className='flex justify-center'>
-                                <button onClick={prevPage} disabled={currentPage === 1} className="relative rounded px-3 overflow-hidden group bg-teal-600 hover:bg-gradient-to-r hover:from-teal-600 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-teal-600 transition-all ease-out duration-300 mr-4">
+                                <a onClick={prevPage} disabled={currentPage === 1} className="rounded relative inline-flex group items-center justify-center px-3.5 py-2 m-1 cursor-pointer border-b-4 border-l-2 active:border-teal-600 active:shadow-none shadow-lg bg-gradient-to-tr from-teal-600 to-teal-500 border-teal-700 text-white">
+                                    <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-32 group-hover:h-32 opacity-10"></span>
                                     <span className="relative">Previous</span>
-                                </button>
-                                <button onClick={nextPage} disabled={indexOfLastRecord >= records.length} className="relative rounded px-5 py-2.5 overflow-hidden group bg-teal-600 hover:bg-gradient-to-r hover:from-teal-600 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-teal-600 transition-all ease-out duration-300">
+                                </a>
+                                <a onClick={nextPage} disabled={indexOfLastRecord >= records.length} className="rounded relative inline-flex group items-center justify-center px-3.5 py-2 m-1 cursor-pointer border-b-4 border-l-2 active:border-teal-600 active:shadow-none shadow-lg bg-gradient-to-tr from-teal-600 to-teal-500 border-teal-700 text-white">
+                                    <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-32 group-hover:h-32 opacity-10"></span>
                                     <span className="relative">Next</span>
-                                </button>
+                                </a>
                             </div>
                         </>)
                     }
@@ -398,14 +402,18 @@ const OverAll = () => {
                         </button>
                     </div>
                     {selectedTab === 'plans' && !showForm && (
-                        <button onClick={() => handleAddButtonClick("plans")} className="focus:ring-2 focus:ring-offset-2 focus:ring-teal-600 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-teal-700 hover:bg-teal-600 focus:outline-none rounded">
-                            <p className="text-sm font-medium leading-none text-gray">Add</p>
-                        </button>
+                        <a onClick={() => handleAddButtonClick("plans")} className="rounded relative inline-flex group items-center justify-center px-3.5 py-2 m-1 cursor-pointer border-b-4 border-l-2 active:border-teal-600 active:shadow-none shadow-lg bg-gradient-to-tr from-teal-600 to-teal-500 border-teal-700 text-white">
+                            <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-32 group-hover:h-32 opacity-10"></span>
+                            <span className="relative">Add</span>
+                        </a>
                     )}
                     {selectedTab === 'addon' && !showForm && (
-                        <button onClick={() => handleAddButtonClick("addon")} className="focus:ring-2 focus:ring-offset-2 focus:ring-teal-600 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-teal-700 hover:bg-teal-600 focus:outline-none rounded">
-                            <p className="text-sm font-medium leading-none text-gray">Add</p>
-                        </button>
+
+                        <a onClick={() => handleAddButtonClick("addon")} className="rounded relative inline-flex group items-center justify-center px-3.5 py-2 m-1 cursor-pointer border-b-4 border-l-2 active:border-teal-600 active:shadow-none shadow-lg bg-gradient-to-tr from-teal-600 to-teal-500 border-teal-700 text-white">
+                            <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-32 group-hover:h-32 opacity-10"></span>
+                            <span className="relative">Add</span>
+                        </a>
+
                     )}
                 </div>
                 <div className="mt-7 overflow-x-auto" style={{ width: "1000px" }}>
