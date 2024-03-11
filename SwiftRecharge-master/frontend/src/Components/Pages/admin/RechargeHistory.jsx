@@ -133,21 +133,18 @@ const RechargeHistory = ({ userName }) => {
                           <div className="flex justify-evenly">
                             {
                               recharge.plan && <div className='flex justify-center items-center'>
-                                <button
-                                  onClick={() => eventShowPlan(recharge.plan)}
-                                  className="block text-sm font-medium rounded px-5 py-2.5 overflow-hidden group bg-teal-600 hover:bg-gradient-to-r hover:from-teal-600 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-teal-600 transition-all ease-out duration-300"
-                                >
-                                  Plan
-                                </button>
+                                <a onClick={() => eventShowPlan(recharge.plan)} className="rounded relative inline-flex group items-center justify-center px-3.5 py-2 m-1 cursor-pointer border-b-4 border-l-2 active:border-teal-600 active:shadow-none shadow-lg bg-gradient-to-tr from-teal-600 to-teal-500 border-teal-700 text-white">
+                                  <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-32 group-hover:h-32 opacity-10"></span>
+                                  <span className="relative">Plan</span>
+                                </a>
                               </div>
                             }
                             {
-                              recharge.addon && <button
-                                onClick={() => eventShowAddon(recharge.addon)}
-                                className="block text-sm font-medium rounded px-5 py-2.5 overflow-hidden group bg-teal-600 hover:bg-gradient-to-r hover:from-teal-600 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-teal-600 transition-all ease-out duration-300"
-                              >
-                                Addon
-                              </button>
+                              recharge.addon &&
+                              <a onClick={() => eventShowAddon(recharge.addon)} className="rounded relative inline-flex group items-center justify-center px-3.5 py-2 m-1 cursor-pointer border-b-4 border-l-2 active:border-teal-600 active:shadow-none shadow-lg bg-gradient-to-tr from-teal-600 to-teal-500 border-teal-700 text-white">
+                                <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-32 group-hover:h-32 opacity-10"></span>
+                                <span className="relative">Plan</span>
+                              </a>
                             }
                           </div>
                         </td>

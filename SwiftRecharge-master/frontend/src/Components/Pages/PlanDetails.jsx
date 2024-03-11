@@ -16,6 +16,10 @@ const PlanDetails = () => {
     return (
         <div className='pt-20' >
             <div className='flex flex-col md:flex-row h-screen w-full'>
+            <div className="md:w-full bg-gray-200 py-4 px-4 overflow-y-auto">
+                    {/* <Tabs openTab={openTab} setOpenTab={setOpenTab} operatorName={operatorName} accessToken={accessToken} /> */}
+                    <Tabs openTab={openTab} setOpenTab={setOpenTab} operatorName={operator} accessToken={accessToken} />
+                </div>
                 <div className='md:w-2/4 bg-gray-100 flex justify-center items-center px-4'>
                     <article className="rounded-xl bg-white p-4 ring ring-indigo-50 sm:p-6 lg:p-8">
                         <div className="flex items-start sm:gap-8">
@@ -57,10 +61,7 @@ const PlanDetails = () => {
                         </div>
                     </article>
                 </div>
-                <div className="md:w-full bg-gray-200 py-4 px-4 overflow-y-auto">
-                    {/* <Tabs openTab={openTab} setOpenTab={setOpenTab} operatorName={operatorName} accessToken={accessToken} /> */}
-                    <Tabs openTab={openTab} setOpenTab={setOpenTab} operatorName={operator} accessToken={accessToken} />
-                </div>
+                
             </div>
         </div>
     )

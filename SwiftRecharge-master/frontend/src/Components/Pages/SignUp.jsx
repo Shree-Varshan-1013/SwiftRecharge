@@ -195,22 +195,24 @@ export default function SignUp() {
                                         Operator Name
                                     </label>
                                 </div>
-                                <div className="mt-2">
-                                    <input
+
+                                <div className="relative">
+                                    <select
                                         id="operatorName"
                                         name="operatorName"
-                                        type="text"
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
                                         value={values.operatorName}
-                                        autoComplete="current-location"
-                                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6 pl-3"
-                                    />
+                                        onChange={handleChange}
+                                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6 pl-300 p-4 pe-12 text-sm shadow-sm font-anuphan appearance-none  "
+                                    >
+                                        <option value="" disabled>Select Operator</option>
+                                        <option value="Airtel">Airtel</option>
+                                        <option value="Bsnl">Bsnl</option>
+                                        <option value="Jio">Jio</option>
+                                        <option value="Vi">Vi</option>
+                                    </select>
+                                    {errors.operatorName && touched.operatorName && <div className="text-red-600 text-xs">{errors.operatorName}</div>}
                                 </div>
                             </div>
-                            {errors.operatorName && touched.operatorName ? (
-                                <p style={{ color: "red" }}>{errors.operatorName}</p>
-                            ) : null}
                             <div>
                                 <div className="flex items-center justify-between">
                                     <label htmlFor="location" className="block text-sm font-medium leading-6 text-gray-900">
